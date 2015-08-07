@@ -12,3 +12,8 @@
 # Gradle
 gradle.properties
 /bin/
+/target/
+
+.classpath
+.project
+.settings

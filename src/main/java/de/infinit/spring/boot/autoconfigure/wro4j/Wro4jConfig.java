@@ -49,7 +49,7 @@ public class Wro4jConfig {
         return filterRegistrationBean;
     }
 
-    @ConditionalOnClass(groovy.lang.GroovyObject.class)
+    @ConditionalOnClass(name="groovy.lang.GroovyObject.class")
     @ConditionalOnMissingBean(WroManagerFactory.class)
     @Bean
     WroManagerFactory groovyWroManagerFactory() {
@@ -59,7 +59,7 @@ public class Wro4jConfig {
     @ConditionalOnMissingBean(WroManagerFactory.class)
     @Bean
     WroManagerFactory fallbackWroManagerFactory() {
-        return new SimpleWroManagerFactory(wroManagerFactoryProperties());
+        return new XmlWroManagerFactory(wro4jProperties.getXmlResourceName(), wroManagerFactoryProperties());
     }
 
     Properties wroManagerFactoryProperties() {

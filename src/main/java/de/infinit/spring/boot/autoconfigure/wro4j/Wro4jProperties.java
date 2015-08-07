@@ -22,6 +22,8 @@ public class Wro4jProperties {
     private String postProcessors = "cssVariables,cssMinJawr,jsMin";
 
     private String groovyResourceName = "wro.groovy";
+    
+    private String xmlResourceName = "wro.xml";
 
     private String hashStrategy = "MD5";
 
@@ -103,7 +105,15 @@ public class Wro4jProperties {
         this.groovyResourceName = groovyResourceName;
     }
 
-    public String getHashStrategy() {
+    public String getXmlResourceName() {
+		return xmlResourceName;
+	}
+
+	public void setXmlResourceName(String xmlResourceName) {
+		this.xmlResourceName = xmlResourceName;
+	}
+
+	public String getHashStrategy() {
         return hashStrategy;
     }
 

@@ -1,5 +1,7 @@
 package de.infinit.spring.boot.autoconfigure.wro4j;
 
+import java.util.Properties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -7,17 +9,26 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+
 import ro.isdc.wro.config.jmx.ConfigConstants;
 import ro.isdc.wro.http.ConfigurableWroFilter;
+import ro.isdc.wro.manager.factory.ConfigurableWroManagerFactory;
 import ro.isdc.wro.manager.factory.WroManagerFactory;
+import ro.isdc.wro.model.group.GroupExtractor;
 import ro.isdc.wro.model.resource.locator.factory.ConfigurableLocatorFactory;
 import ro.isdc.wro.model.resource.processor.factory.ConfigurableProcessorsFactory;
 import ro.isdc.wro.model.resource.support.hash.ConfigurableHashStrategy;
 import ro.isdc.wro.model.resource.support.naming.ConfigurableNamingStrategy;
-import java.util.Properties;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.ThymeleafWro4jDialectConfiguration;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.EnhancedGroupExtractor;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileGroupExtractor;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileModelTransformer;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.WroDeliveryConfiguration;
 
 @Configuration
 @EnableConfigurationProperties(Wro4jProperties.class)
+@Import(ThymeleafWro4jDialectConfiguration.class)
 public class Wro4jConfig {
 
     @Autowired
@@ -52,16 +63,37 @@ public class Wro4jConfig {
     @ConditionalOnClass(name="groovy.lang.GroovyObject.class")
     @ConditionalOnMissingBean(WroManagerFactory.class)
     @Bean
-    WroManagerFactory groovyWroManagerFactory() {
-        return new GroovyWroManagerFactory(wro4jProperties.getGroovyResourceName(), wroManagerFactoryProperties());
+    WroManagerFactory groovyWroManagerFactory(GroupExtractor groupExtractor) {
+    	GroovyWroManagerFactory wmf = new GroovyWroManagerFactory(wro4jProperties.getGroovyResourceName(), wroManagerFactoryProperties());
+    	configureWroManagerFactory(wmf, groupExtractor);
+        return wmf;
     }
 
     @ConditionalOnMissingBean(WroManagerFactory.class)
     @Bean
-    WroManagerFactory fallbackWroManagerFactory() {
-        return new XmlWroManagerFactory(wro4jProperties.getXmlResourceName(), wroManagerFactoryProperties());
+    WroManagerFactory fallbackWroManagerFactory(GroupExtractor groupExtractor) {
+    	XmlWroManagerFactory wmf = new XmlWroManagerFactory(wro4jProperties.getXmlResourceName(), wroManagerFactoryProperties());
+        configureWroManagerFactory(wmf, groupExtractor);
+        return wmf;
     }
 
+    protected void configureWroManagerFactory(ConfigurableWroManagerFactory wmf, GroupExtractor groupExtractor){
+    	if(wro4jProperties.isDevelopment()) {
+        	wmf.addModelTransformer(new GroupPerFileModelTransformer());
+		}
+    	wmf.setGroupExtractor(groupExtractor);
+    }
+    
+    @ConditionalOnMissingBean(GroupExtractor.class)
+	@Bean
+	public GroupExtractor groupExtractor(Wro4jProperties wro4jProperties, WroDeliveryConfiguration wroDeliveryConfiguration) {
+		if(wro4jProperties.isDevelopment()) {
+			return new GroupPerFileGroupExtractor(wroDeliveryConfiguration);
+		} else {
+			return new EnhancedGroupExtractor();
+		}
+	}
+    
     Properties wroManagerFactoryProperties() {
         Properties properties = new Properties();
         properties.put(ConfigurableLocatorFactory.PARAM_URI_LOCATORS, wro4jProperties.getUriLocators());

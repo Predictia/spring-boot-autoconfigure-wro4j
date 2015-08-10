@@ -8,6 +8,8 @@ public class Wro4jProperties {
     private boolean disableCache;
 
     private boolean debug = false;
+    
+    private boolean development = false;
 
     private int cacheUpdatePeriod = 0;
 
@@ -48,8 +50,16 @@ public class Wro4jProperties {
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
+    
+    public boolean isDevelopment() {
+		return development;
+	}
 
-    public int getCacheUpdatePeriod() {
+	public void setDevelopment(boolean development) {
+		this.development = development;
+	}
+
+	public int getCacheUpdatePeriod() {
         return cacheUpdatePeriod;
     }
 

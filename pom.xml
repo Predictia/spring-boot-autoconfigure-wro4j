@@ -7,20 +7,18 @@
 	<artifactId>spring-boot-autoconfigure-wro4j</artifactId>
 	<version>0.0.7-SNAPSHOT</version>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>ro.isdc.wro4j</groupId>
 			<artifactId>wro4j-extensions</artifactId>
 			<version>1.7.8</version>
-			<scope>runtime</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>org.codehaus.groovy</groupId>
@@ -83,14 +81,14 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>spring-boot-autoconfigure-wro4j</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
-					<debug>true</debug>
 				</configuration>
 			</plugin>
 		</plugins>

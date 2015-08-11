@@ -60,7 +60,7 @@ public class Wro4jConfig {
         return filterRegistrationBean;
     }
 
-    @ConditionalOnClass(name="groovy.lang.GroovyObject.class")
+    @ConditionalOnClass(name="groovy.lang.GroovyObject")
     @ConditionalOnMissingBean(WroManagerFactory.class)
     @Bean
     WroManagerFactory groovyWroManagerFactory(GroupExtractor groupExtractor) {

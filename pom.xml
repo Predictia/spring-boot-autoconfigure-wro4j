@@ -14,6 +14,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>ro.isdc.wro4j</groupId>
@@ -24,12 +30,73 @@
 					<groupId>org.codehaus.groovy</groupId>
 					<artifactId>groovy-all</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>jruby-core</artifactId>
+					<groupId>org.jruby</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jruby-stdlib</artifactId>
+					<groupId>org.jruby</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>gmaven-runtime-1.7</artifactId>
+					<groupId>org.codehaus.gmaven.runtime</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bourbon-gem-jar</artifactId>
+					<groupId>nz.co.edmi</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>handlebars</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>emberjs</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>sass-gems</artifactId>
+					<groupId>me.n4u.sass</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>coffee-script</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>less4j</artifactId>
+					<groupId>com.github.sommeri</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>closure-compiler</artifactId>
+					<groupId>com.google.javascript</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jslint</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jshint</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>less</artifactId>
+					<groupId>org.webjars</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dojo-shrinksafe</artifactId>
+					<groupId>com.github.lltyk</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<optional>true</optional>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

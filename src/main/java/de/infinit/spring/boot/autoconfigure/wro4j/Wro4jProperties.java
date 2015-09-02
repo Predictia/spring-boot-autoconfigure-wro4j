@@ -19,7 +19,7 @@ public class Wro4jProperties {
 
     private String uriLocators = "servletContext,classpath,uri";
 
-    private String preProcessors = "cssUrlRewriting,cssImport,semicolonAppender,lessCss";
+    private String preProcessors = "cssUrlRewriting,cssImport,semicolonAppender";
 
     private String postProcessors = "cssVariables,cssMinJawr,jsMin";
 

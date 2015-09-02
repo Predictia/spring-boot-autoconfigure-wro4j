@@ -11,9 +11,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import ro.isdc.wro.manager.factory.WroManagerFactory;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = TestApplicationWithWroManagerFactory.class, loader = SpringApplicationContextLoader.class)
+@ContextConfiguration(classes = TestApplication.class, loader = SpringApplicationContextLoader.class)
 public class TestApplicationWithWroManagerFactoryTests {
 
     @Autowired
@@ -21,7 +23,7 @@ public class TestApplicationWithWroManagerFactoryTests {
 
     @Test
     public void testContextLoads() throws Exception {
-        assertNotNull("The TestWroManagerFactory should be present", applicationContext.getBean(TestWroManagerFactory.class));
+        assertNotNull("The TestWroManagerFactory should be present", applicationContext.getBean(WroManagerFactory.class));
     }
 
 }

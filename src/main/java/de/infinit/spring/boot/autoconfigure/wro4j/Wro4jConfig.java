@@ -5,12 +5,17 @@ import java.util.Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.ThymeleafWro4jDialectConfiguration;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.EnhancedGroupExtractor;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileGroupExtractor;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileModelTransformer;
+import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.WroDeliveryConfiguration;
 import ro.isdc.wro.config.jmx.ConfigConstants;
 import ro.isdc.wro.http.ConfigurableWroFilter;
 import ro.isdc.wro.manager.factory.ConfigurableWroManagerFactory;
@@ -20,11 +25,6 @@ import ro.isdc.wro.model.resource.locator.factory.ConfigurableLocatorFactory;
 import ro.isdc.wro.model.resource.processor.factory.ConfigurableProcessorsFactory;
 import ro.isdc.wro.model.resource.support.hash.ConfigurableHashStrategy;
 import ro.isdc.wro.model.resource.support.naming.ConfigurableNamingStrategy;
-import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.ThymeleafWro4jDialectConfiguration;
-import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.EnhancedGroupExtractor;
-import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileGroupExtractor;
-import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.GroupPerFileModelTransformer;
-import de.infinit.spring.boot.autoconfigure.wro4j.thymeleaf.support.WroDeliveryConfiguration;
 
 @Configuration
 @EnableConfigurationProperties(Wro4jProperties.class)

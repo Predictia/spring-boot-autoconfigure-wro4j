@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -15,7 +14,7 @@ import ro.isdc.wro.manager.factory.WroManagerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = TestApplication.class, loader = SpringApplicationContextLoader.class)
+@ContextConfiguration(classes = TestApplication.class)
 public class TestApplicationWithWroManagerFactoryTests {
 
     @Autowired
